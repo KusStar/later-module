@@ -4,6 +4,8 @@ import { join } from 'path';
 import Module from 'module'
 import semver from 'semver'
 
+const DEFAULT_CWD = process.cwd()
+
 interface LazyLock {
   [key: string]: string
 }
@@ -26,12 +28,12 @@ export class LazyModule {
      * current working library
      * @default process.cwd()
      */
-    cwd = process.cwd(),
+    cwd = DEFAULT_CWD,
     /**
      * root directory of the project
-     * @default './mincu-lazy-modules'
+     * @default './lazy-modules'
      */
-    rootPath = './mincu-lazy-modules',
+    rootPath = './lazy-modules',
     /**
      * prefer lock file
      * @default true
@@ -47,20 +49,19 @@ export class LazyModule {
      * @default false
      */
     alwaysFetchRemote = false
-  }) {
+  } = {}) {
     this.installed = new Map()
-
     this.#root = join(cwd, rootPath, './node_modules');
     this.#preferLock = preferLock
     this.#pacoteOptions = pacoteOptions
     this.#alwaysFetchRemote = alwaysFetchRemote
 
     if (preferLock) {
-      this.#lockfile = join(cwd, rootPath, './layz-lock.json')
+      this.#lockfile = join(cwd, rootPath, './lazy-lock.json')
       this.#loadLock()
     }
 
-    this.#module = new Module('', null)
+    this.#module = new Module('', undefined)
     this.#module.paths = [this.#root]
   }
 
@@ -90,7 +91,7 @@ export class LazyModule {
     return join(this.#root, './', name)
   }
 
-  async freshInstall(name: string, version: string, fetchList: any[]) {
+  async freshInstall(name: string, version: string | undefined, fetchList: any[]) {
     const module = this.#moduleName(name, version)
     const { dependencies, version: remoteVersion } = await pacote.manifest(module, this.#pacoteOptions)
     this.installed.set(name, remoteVersion)
