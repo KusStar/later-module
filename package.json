@@ -1,17 +1,17 @@
 {
-  "name": "lazy-module",
+  "name": "later-module",
   "version": "1.0.0",
-  "description": "Download and load npm module lazily",
+  "description": "Install and load npm module later",
   "keywords": [
-    "lazy-module",
-    "lazy download",
-    "lazy load",
-    "lazy require"
+    "later-module",
+    "later install require package"
   ],
-  "repository": "kusstar/lazy-module",
+  "repository": "kusstar/later-module",
   "license": "MIT",
   "author": "KusStar",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm,cjs",
     "pub": "npm run build && release-it",

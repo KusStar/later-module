@@ -2133,7 +2133,7 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /latest-version/7.0.0:
+  /laterst-version/7.0.0:
     resolution: {integrity: sha512-KvNT4XqAMzdcL6ka6Tl3i2lYeFDgXNCuIX+xNx6ZMVR1dFq+idXd9FLKNMOIx0t9mJ9/HudyX4oZWXZQ0UJHeg==}
     engines: {node: '>=14.16'}
     dependencies:
@@ -3636,7 +3636,7 @@ packages:
       is-installed-globally: 0.4.0
       is-npm: 6.0.0
       is-yarn-global: 0.4.0
-      latest-version: 7.0.0
+      laterst-version: 7.0.0
       pupa: 3.1.0
       semver: 7.3.7
       semver-diff: 4.0.0

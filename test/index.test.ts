@@ -24,9 +24,9 @@ describe('LazyModule', () => {
     expect(Array.isArray(normals)).toBe(true);
   })
 
-  it('lazy-lock', () => {
-    const lazyLock = readFileSync(join(__dirname, './lazy-modules/lazy-lock.json'), 'utf-8')
-    expect(lazyLock).toBe(JSON.stringify({
+  it('later-lock', () => {
+    const laterLock = readFileSync(join(__dirname, './later-modules/later-lock.json'), 'utf-8')
+    expect(laterLock).toBe(JSON.stringify({
       "kusstar": "0.3.0"
     }, null, 2))
   })

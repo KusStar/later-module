@@ -6,14 +6,16 @@ import semver from 'semver'
 
 const DEFAULT_CWD = process.cwd()
 
-interface LazyLock {
+const LOCKFILE_NAME = 'later-lock.json'
+
+interface LaterLock {
   [key: string]: string
 }
 
 type ModuleName = string
 type Version = string
 
-export class LazyModule {
+export class LaterModule {
   installed: Map<ModuleName, Version>
 
   #root: string;
@@ -31,9 +33,9 @@ export class LazyModule {
     cwd = DEFAULT_CWD,
     /**
      * root directory of the project
-     * @default './lazy-modules'
+     * @default './later-modules'
      */
-    rootPath = './lazy-modules',
+    rootPath = './later-modules',
     /**
      * prefer lock file
      * @default true
@@ -57,7 +59,7 @@ export class LazyModule {
     this.#alwaysFetchRemote = alwaysFetchRemote
 
     if (preferLock) {
-      this.#lockfile = join(cwd, rootPath, './lazy-lock.json')
+      this.#lockfile = join(cwd, rootPath, LOCKFILE_NAME)
       this.#loadLock()
     }
 
@@ -67,7 +69,7 @@ export class LazyModule {
 
   #loadLock() {
     if (existsSync(this.#lockfile)) {
-      const lockJson = JSON.parse(readFileSync(this.#lockfile).toString()) as LazyLock
+      const lockJson = JSON.parse(readFileSync(this.#lockfile).toString()) as LaterLock
       for (const [pkg, version] of Object.entries(lockJson)) {
         this.installed.set(pkg, version)
       }
@@ -148,4 +150,4 @@ export class LazyModule {
   }
 }
 
-export default LazyModule
+export default LaterModule

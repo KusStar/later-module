@@ -1,30 +1,30 @@
-# lazy-module
+# later-module
 
-> Download and load npm module lazily
+> Install and load npm module later
 
 ## Usage
 
 ### Install
 
 ```sh
-npm i lazy-module
+npm i later-module
 # or
-yarn add lazy-module
+yarn add later-module
 # or
-pnpm add lazy-module
+pnpm add later-module
 ```
 
 ### Example
 
 ```js
 // Commonjs
-const LazyModule = require('lazy-module')
+const LaterModule = require('later-module')
 // ES6
-import LazyModule from 'lazy-module'
+import LaterModule from 'later-module'
 
-const lazyModule = new LazyModule()
+const laterModule = new LaterModule()
 
-const someModule = lazyModule.installAndRequire('some-module')
+const someModule = laterModule.installAndRequire('some-module')
 
 someModule.theMethod();
 ```
@@ -45,7 +45,7 @@ declare class LazyModule {
     cwd, 
     /**
      * root directory of the project
-     * @default './mincu-lazy-modules'
+     * @default './later-modules'
      */
     rootPath, 
     /**
@@ -62,14 +62,14 @@ declare class LazyModule {
      * always fetch package from remote when version is not specified
      * @default false
      */
-    alwaysFetchRemote }: {
+    alwaysFetchRemote }?: {
         cwd?: string;
         rootPath?: string;
         preferLock?: boolean;
         pacoteOptions?: any;
         alwaysFetchRemote?: boolean;
     });
-    freshInstall(name: string, version: string, fetchList: any[]): Promise<void>;
+    freshInstall(name: string, version: string | undefined, fetchList: any[]): Promise<void>;
     install(name: string, version?: string): Promise<void>;
     require(name: string): any;
     installAndRequire(name: string, version?: string): Promise<any>;
