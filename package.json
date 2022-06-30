@@ -14,7 +14,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm,cjs",
-    "pub": "npm run build && releast-it",
+    "pub": "npm run build && release-it",
     "test": "vitest --run",
     "test:watch": "vitest"
   },
