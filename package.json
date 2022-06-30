@@ -14,7 +14,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm,cjs",
-    "pub": "npm run build && releast-it"
+    "pub": "npm run build && releast-it",
+    "test": "vitest --run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "pacote": "^13.6.1",
@@ -23,10 +25,9 @@
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/pacote": "^11.1.5",
-    "@vercel/ncc": "^0.34.0",
     "release-it": "^15.1.1",
-    "tslib": "^2.4.0",
     "tsup": "^6.1.2",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vitest": "^0.16.0"
   }
 }
