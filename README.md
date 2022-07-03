@@ -34,7 +34,7 @@ someModule.theMethod();
 ```ts
 declare type ModuleName = string;
 declare type Version = string;
-declare class LazyModule {
+declare class LaterModule {
     #private;
     installed: Map<ModuleName, Version>;
     constructor({ 
@@ -71,11 +71,11 @@ declare class LazyModule {
     });
     freshInstall(name: string, version: string | undefined, fetchList: any[]): Promise<void>;
     install(name: string, version?: string): Promise<void>;
-    require(name: string): any;
-    installAndRequire(name: string, version?: string): Promise<any>;
+    require<T>(name: string): T | undefined;
+    installAndRequire<T>(name: string, version?: string): Promise<T | undefined>;
 }
 
-export { LazyModule, LazyModule as default };
+export { LaterModule, LaterModule as default };
 ```
 
 ## License
