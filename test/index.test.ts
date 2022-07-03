@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import LazyModule from '../src/index';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-
 describe('LazyModule', () => {
   const lazyModule = new LazyModule({
     cwd: __dirname,
@@ -15,13 +14,18 @@ describe('LazyModule', () => {
   });
 
   it('require', () => {
-    const kusstar = lazyModule.require('kusstar');
+    // Get the typings from devDependencies
+    type Kusstar = typeof import('kusstar')
+    
+    const kusstar = lazyModule.require<Kusstar>('kusstar');
     expect(kusstar).not.toBe(undefined);
-    const { positions, cells, colors, normals } = kusstar
-    expect(Array.isArray(positions)).toBe(true);
-    expect(Array.isArray(cells)).toBe(true);
-    expect(Array.isArray(colors)).toBe(true);
-    expect(Array.isArray(normals)).toBe(true);
+    if (kusstar) {
+      const { positions, cells, colors, normals } = kusstar
+      expect(Array.isArray(positions)).toBe(true);
+      expect(Array.isArray(cells)).toBe(true);
+      expect(Array.isArray(colors)).toBe(true);
+      expect(Array.isArray(normals)).toBe(true);
+    }
   })
 
   it('later-lock', () => {

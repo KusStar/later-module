@@ -134,9 +134,9 @@ export class LaterModule {
     return this.#writeLock()
   }
 
-  require(name: string) {
+  require<T>(name: string): T | undefined {
     try {
-      const required = this.#module.require(name)
+      const required = this.#module.require(name) as T
       return required
     } catch (err) {
       console.error(err)
@@ -144,9 +144,9 @@ export class LaterModule {
     }
   }
 
-  async installAndRequire(name: string, version?: string) {
+  async installAndRequire<T>(name: string, version?: string): Promise<T | undefined> {
     await this.install(name, version)
-    return this.require(name)
+    return this.require<T>(name)
   }
 }
 
